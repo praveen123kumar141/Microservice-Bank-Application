@@ -1,6 +1,8 @@
 package com.feature.entity;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Set;
 
 
 
@@ -51,6 +53,28 @@ public class Bankdatabase {
 	
 	private String internet_bank_status;
 	
+	private Set<Payee> payee;
+	
+	private String pin;
+	
+	
+	
+
+	public Set<Payee> getPayee() {
+		return payee;
+	}
+
+	public void setPayee(Set<Payee> payee) {
+		this.payee = payee;
+	}
+
+	public String getPin() {
+		return pin;
+	}
+
+	public void setPin(String pin) {
+		this.pin = pin;
+	}
 
 	public String getInternet_bank_status() {
 		return internet_bank_status;

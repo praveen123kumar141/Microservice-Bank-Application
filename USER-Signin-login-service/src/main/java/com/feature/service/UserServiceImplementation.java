@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.feature.entity.Bankdatabase;
+import com.feature.entity.MailRequest;
 import com.feature.entity.UserSignin;
 @Service
 public class UserServiceImplementation implements UserService {
@@ -44,6 +45,13 @@ public class UserServiceImplementation implements UserService {
 			}else {
 					body.setInternet_bank_status("ACTIVE");
 					this.restTemplate.put(puturi,body);
+					 String url="http://localhost:8090/sendingEmailInternet_Bank_Service";
+					 MailRequest req=new MailRequest();
+						req.setFrom("natanipraveenkumar@gmail.com");
+						req.setName(body.getUserName());
+						req.setTo(body.getEmail());
+						req.setSubject("INTERNET BANKING");
+						this.restTemplate.postForEntity(url,req,String.class);
 					return "YOU HAVR SUCCESSFULLY REGISTERD FOR INTERNET BANKING";
 					
 				}

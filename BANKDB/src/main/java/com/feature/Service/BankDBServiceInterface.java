@@ -11,5 +11,7 @@ public interface BankDBServiceInterface {
 	public Bankdatabase getcustomerdetails(String id)throws Exception;
 	
 	public Bankdatabase updateInternetBankStstus(Bankdatabase ob) throws Exception;
-
+	//public String addPayee(Bankdatabase ob)throws Exception;
+	public Bankdatabase getCustomerdetailsByacno(String acno)throws Exception;
+	public Bankdatabase updatecustomerdetails(Bankdatabase ob)throws Exception;
 }

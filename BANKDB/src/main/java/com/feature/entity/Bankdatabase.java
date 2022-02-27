@@ -1,12 +1,16 @@
 package com.feature.entity;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -14,6 +18,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.feature.generators.UserIdGenerator;
+
 
 @Entity //normal java class treated it as a database table
 @Table(name = "BANKDB")
@@ -42,7 +47,7 @@ public class Bankdatabase {
 	private String ifscCode="FECA002304"; 
 	
 	@Column(name="BALENCE")
-	private Long balence;
+	private double balence;
 	
 	@Column(name="EMAIL")
 	private String email;
@@ -78,50 +83,59 @@ public class Bankdatabase {
 	
 	@Column(name="INTERNET_BANKING_STATUS")
 	private String internet_bank_status;
+	
+	@Column(name="Payees")
+	@OneToMany(targetEntity=Payee.class,mappedBy = "bankdbrec",cascade = CascadeType.ALL)
+	private Set<Payee> payee;
+	
+	@Column(name="TEMP_PIN")
+	private String pin;
+	
+	
+	
+	public String getPin() {
+		return pin;
+	}
 
-	
-	
+	public void setPin(String pin) {
+		this.pin = pin;
+	}
+
+	public Set<Payee> getPayee() {
+		return payee;
+	}
+
+	public void setPayee(Set<Payee> payee) {
+		this.payee = payee;
+	}
+
 	public String getUserId() {
 		return userId;
 	}
-
-
 
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 
-
-
 	public String getUserName() {
 		return userName;
 	}
-
-
 
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
 
-
-
 	public String getAcNo() {
 		return acNo;
 	}
-
-
 
 	public void setAcNo(String acNo) {
 		this.acNo = acNo;
 	}
 
-
-
 	public String getIfscCode() {
 		return ifscCode;
 	}
-
-
 
 	public void setIfscCode(String ifscCode) {
 		this.ifscCode = ifscCode;
@@ -129,161 +143,115 @@ public class Bankdatabase {
 
 
 
-	public Long getBalence() {
+	
+
+	public double getBalence() {
 		return balence;
 	}
 
-
-
-	public void setBalence(Long balence) {
+	public void setBalence(double balence) {
 		this.balence = balence;
 	}
-
-
 
 	public String getEmail() {
 		return email;
 	}
 
-
-
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
-
 
 	public String getMobileNo() {
 		return mobileNo;
 	}
 
-
-
 	public void setMobileNo(String mobileNo) {
 		this.mobileNo = mobileNo;
 	}
-
-
 
 	public String getBankAddr() {
 		return bankAddr;
 	}
 
-
-
 	public void setBankAddr(String bankAddr) {
 		this.bankAddr = bankAddr;
 	}
-
-
 
 	public String getAccStatus() {
 		return accStatus;
 	}
 
-
-
 	public void setAccStatus(String accStatus) {
 		this.accStatus = accStatus;
 	}
-
-
 
 	public String getAccType() {
 		return accType;
 	}
 
-
-
 	public void setAccType(String accType) {
 		this.accType = accType;
 	}
-
-
 
 	public String getCustAddr() {
 		return custAddr;
 	}
 
-
-
 	public void setCustAddr(String custAddr) {
 		this.custAddr = custAddr;
 	}
-
-
 
 	public LocalDate getDob() {
 		return dob;
 	}
 
-
-
 	public void setDob(LocalDate dob) {
 		this.dob = dob;
 	}
-
-
 
 	public String getGovidproof() {
 		return govidproof;
 	}
 
-
-
 	public void setGovidproof(String govidproof) {
 		this.govidproof = govidproof;
 	}
-
-
 
 	public LocalDate getCreatinData() {
 		return creatinData;
 	}
 
-
-
 	public void setCreatinData(LocalDate creatinData) {
 		this.creatinData = creatinData;
 	}
-
-
 
 	public LocalDate getLatUpdatedDate() {
 		return latUpdatedDate;
 	}
 
-
-
 	public void setLatUpdatedDate(LocalDate latUpdatedDate) {
 		this.latUpdatedDate = latUpdatedDate;
 	}
-
-
-
-
-
 
 	public String getInternet_bank_status() {
 		return internet_bank_status;
 	}
 
-
-
 	public void setInternet_bank_status(String internet_bank_status) {
 		this.internet_bank_status = internet_bank_status;
 	}
-
-
 
 	@Override
 	public String toString() {
 		return "Bankdatabase [userId=" + userId + ", userName=" + userName + ", acNo=" + acNo + ", ifscCode=" + ifscCode
 				+ ", balence=" + balence + ", email=" + email + ", mobileNo=" + mobileNo + ", bankAddr=" + bankAddr
-				+ ", accStatus=" + accStatus + ", accType=" + accType + ", custAddr=" + custAddr + ", creatinData="
-				+ creatinData + ", latUpdatedDate=" + latUpdatedDate + ", internet_bank_status=" + internet_bank_status
-				+ "]";
+				+ ", accStatus=" + accStatus + ", accType=" + accType + ", custAddr=" + custAddr + ", dob=" + dob
+				+ ", govidproof=" + govidproof + ", creatinData=" + creatinData + ", latUpdatedDate=" + latUpdatedDate
+				+ ", internet_bank_status=" + internet_bank_status + "]";
 	}
+
+	
+	
 	
 	
 

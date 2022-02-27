@@ -3,6 +3,7 @@ package com.feature.service;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
+import java.util.Random;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -59,5 +60,105 @@ public class EmailService {
 
 		return "mail is sent successfully";
 	}
+	public/* MailResponse*/String sendEmailintbank(MailRequest request, Map<String, Object> model) {
+		//MailResponse response = new MailResponse();
+		MimeMessage message = sender.createMimeMessage();
+		try {
+			// set mediaType
+			MimeMessageHelper helper = new MimeMessageHelper(message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
+					StandardCharsets.UTF_8.name());
+			// add attachment
+			//helper.addAttachment("logo.png", new ClassPathResource("logo.png"));
 
+			Template t = config.getTemplate("email-template-intbank.ftl");
+			String html = FreeMarkerTemplateUtils.processTemplateIntoString(t, model);
+
+			helper.setTo(request.getTo());
+			helper.setText(html, true);
+			helper.setSubject(request.getSubject());
+			helper.setFrom(request.getFrom());
+			sender.send(message);
+
+			//response.setMessage("mail send to : " + request.getTo());
+			//response.setStatus(Boolean.TRUE);
+
+		} catch (MessagingException | IOException | TemplateException e) {
+			//response.setMessage("Mail Sending failure : "+e.getMessage());
+			//response.setStatus(Boolean.FALSE);
+			e.printStackTrace();
+		}
+
+		return "mail is sent successfully";
+	}
+	
+	public String sendotp(MailRequest request, Map<String, Object> model) {
+		MimeMessage message = sender.createMimeMessage();
+		try {
+			// set mediaType
+			MimeMessageHelper helper = new MimeMessageHelper(message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
+					StandardCharsets.UTF_8.name());
+			// add attachment
+			//helper.addAttachment("logo.png", new ClassPathResource("logo.png"));
+
+			Template t = config.getTemplate("otp-template.ftl");
+			String html = FreeMarkerTemplateUtils.processTemplateIntoString(t, model);
+
+			helper.setTo(request.getTo());
+			helper.setText(html, true);
+			helper.setSubject(request.getSubject());
+			helper.setFrom(request.getFrom());
+			sender.send(message);
+
+			//response.setMessage("mail send to : " + request.getTo());
+			//response.setStatus(Boolean.TRUE);
+
+		} catch (MessagingException | IOException | TemplateException e) {
+			//response.setMessage("Mail Sending failure : "+e.getMessage());
+			//response.setStatus(Boolean.FALSE);
+			e.printStackTrace();
+		}
+
+		return "otp sent successfully";
+	}
+	
+	public String generateotp() {
+	
+		 Random rnd = new Random();
+		 int number = rnd.nextInt(999999);
+		return String.format("%06d", number);
+	}
+	
+	
+	public String paymentconformation(MailRequest request, Map<String, Object> model) {
+		// TODO Auto-generated method stub
+		MimeMessage message = sender.createMimeMessage();
+		try {
+			// set mediaType
+			MimeMessageHelper helper = new MimeMessageHelper(message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
+					StandardCharsets.UTF_8.name());
+			// add attachment
+			//helper.addAttachment("logo.png", new ClassPathResource("logo.png"));
+
+			Template t = config.getTemplate("paymentconform-template.ftl");
+			String html = FreeMarkerTemplateUtils.processTemplateIntoString(t, model);
+
+			helper.setTo(request.getTo());
+			helper.setText(html, true);
+			helper.setSubject(request.getSubject());
+			helper.setFrom(request.getFrom());
+			sender.send(message);
+
+			//response.setMessage("mail send to : " + request.getTo());
+			//response.setStatus(Boolean.TRUE);
+
+		} catch (MessagingException | IOException | TemplateException e) {
+			//response.setMessage("Mail Sending failure : "+e.getMessage());
+			//response.setStatus(Boolean.FALSE);
+			e.printStackTrace();
+		}
+
+		return "Payment conformation mail sent successfully";
+	}
+	
+	
 }

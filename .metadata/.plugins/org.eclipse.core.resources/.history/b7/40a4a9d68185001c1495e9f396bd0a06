@@ -1,0 +1,65 @@
+package com.feature.entity;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+
+@Entity
+@Table(name = "BANKDB")
+public class Bankdatabase {
+	
+	@Id()
+	@Column(name="USERID")
+	@GenericGenerator(name="user_id_seq",strategy ="com.feature.generators.UserIdGenerator" )
+	@GeneratedValue(generator = "user_id_seq")
+	int userId;
+	
+	@Column(name="USER_NAME")
+	String userName;
+	
+	@Column(name="IFSC_CODE")
+	private static String ifscCode="FECA002304"; 
+	
+	@Column(name="BALENCE")
+	private Long balence;
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public static String getIfscCode() {
+		return ifscCode;
+	}
+
+	public static void setIfscCode(String ifscCode) {
+		Bankdatabase.ifscCode = ifscCode;
+	}
+
+	public Long getBalence() {
+		return balence;
+	}
+
+	public void setBalence(Long balence) {
+		this.balence = balence;
+	}
+	
+	
+	
+
+}

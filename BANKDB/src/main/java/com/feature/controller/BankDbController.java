@@ -34,6 +34,17 @@ public class BankDbController {
 	public Bankdatabase updateInternetbankStatus(@RequestBody Bankdatabase ob)throws Exception {
 		return bs.updateInternetBankStstus(ob);
 	}
-	
-
+	/*@PutMapping("/adding_Payee")
+	public String addingPayee(@RequestBody Bankdatabase ob)throws Exception{
+		return bs.addPayee(ob);
+	}*/
+	@GetMapping("/getcustomerBYacno/{id}")
+	public Bankdatabase getcustomerByAcno(@PathVariable String id)throws Exception {
+		Bankdatabase customerdetails =bs.getCustomerdetailsByacno(id);
+		return customerdetails;
+	}
+	@PutMapping("/updatecustomerdetails")
+	public Bankdatabase updatecustomerdetails(@RequestBody Bankdatabase ob) throws Exception {
+		return bs.updatecustomerdetails(ob);
+	}
 }

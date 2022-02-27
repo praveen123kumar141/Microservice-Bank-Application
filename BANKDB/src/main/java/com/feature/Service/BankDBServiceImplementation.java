@@ -5,8 +5,11 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -92,10 +95,47 @@ public class BankDBServiceImplementation implements BankDBServiceInterface {
 	@Override
 	public Bankdatabase updateInternetBankStstus(Bankdatabase ob) throws Exception {
 		// TODO Auto-generated method stub
+		ob.setPayee(null);
 		Bankdatabase save = bdr.save(ob);
 		return save;
 	}
 
+
+
+/*	@Override
+	public String addPayee(Bankdatabase ob) throws Exception {
+		// TODO Auto-generated method stub
+		bdr.save(ob);
+		return "Payee Account Added Successfully";
+	}*/
+
+
+
+	@Override
+	public Bankdatabase getCustomerdetailsByacno(String acno) throws Exception {
+		// TODO Auto-generated method stub
+		List<Bankdatabase> findAll = bdr.findAll();
+		Iterator<Bankdatabase> i=findAll.iterator();
+		while(i.hasNext()) {
+			Bankdatabase next = i.next();
+			if(next.getAcNo().equals(acno)) {
+				return next;
+			}
+		}
+		Bankdatabase ob=new Bankdatabase();
+		return ob;
+	}
+
+
+
+	@Override
+	public Bankdatabase updatecustomerdetails(Bankdatabase ob) throws Exception {
+		// TODO Auto-generated method stub
+		ob.setPayee(null);
+		Bankdatabase save = bdr.save(ob);
+		return save;
+	}
+	
 
 
 	

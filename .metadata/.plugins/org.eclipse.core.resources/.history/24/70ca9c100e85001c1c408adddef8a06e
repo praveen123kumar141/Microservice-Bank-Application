@@ -1,0 +1,6 @@
+package com.feature.controller;
+
+@RestController
+public class BankDbController {
+
+}
